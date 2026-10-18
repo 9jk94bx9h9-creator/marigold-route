@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Route to Marigold Banquets">
+<meta property="og:description" content="Pick where you are coming from and watch the route to the venue.">
+<meta property="og:image" content="poster-irani.jpg">
+<title>Way to Marigold Banquets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Hind:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow column like a printed invitation insert — venue, pick your direction, video, written steps */
+:root {
+  --ground: #FBF7EF;        /* ivory card stock */
+  --ink: #2B1F1C;           /* deep brown-black */
+  --muted: #74675E;
+  --maroon: #7A1F2B;        /* invitation maroon */
+  --marigold: #E08A1E;      /* marigold petal orange */
+  --gold: #B8923C;
+  --line: #E6DCC9;
+  --chip: #FFFFFF;
+  --chip-on: #7A1F2B;
+  --chip-on-fg: #FFFFFF;
+  --display: "Marcellus", "Cormorant Garamond", Georgia, serif;
+  --body: "Hind", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground: #1E1514; --ink: #F3E9DC; --muted: #BBAA9A; --maroon: #E07A86; --marigold: #F2A445; --gold: #D7B565;
+  --line: #3A2B28; --chip: #2A1E1C; --chip-on: #B23A4A; --chip-on-fg: #FFFFFF; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --ground: #1E1514; --ink: #F3E9DC; --muted: #BBAA9A; --maroon: #E07A86; --marigold: #F2A445; --gold: #D7B565;
+  --line: #3A2B28; --chip: #2A1E1C; --chip-on: #B23A4A; --chip-on-fg: #FFFFFF; color-scheme: dark }
+
+html { -webkit-text-size-adjust: 100%; } [hidden]{display:none!important} *{box-sizing:border-box} body { margin:0; background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 1rem; line-height: 1.55; }
+.wrap { max-width: 34rem; margin: 0 auto; padding-block: 1.75rem 3rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 1.6rem; }
+
+header { text-align: center; display: grid; gap: .35rem; }
+.petals { display: flex; justify-content: center; gap: .45rem; }
+.petals i { width: .55rem; height: .55rem; border-radius: 50% 0; background: var(--marigold); transform: rotate(45deg); opacity: .85; }
+.petals i:nth-child(2) { background: var(--gold); }
+.eyebrow { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 7vw, 2.5rem); line-height: 1.1; margin: 0; color: var(--maroon); text-wrap: balance; }
+.addr { color: var(--muted); font-size: .95rem; margin: 0; }
+
+h2 { font-family: var(--display); font-weight: 400; font-size: 1.35rem; margin: 0; color: var(--ink); }
+.pick { display: grid; gap: .75rem; }
+.chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; }
+.chips button { font: inherit; text-align: left; cursor: pointer; border: 1.5px solid var(--line); background: var(--chip); color: var(--ink);
+  border-radius: .8rem; padding: .7rem .85rem; display: grid; gap: .1rem; transition: border-color .15s, background .15s; min-width: 0; }
+.chips button:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.chips button b { font-weight: 600; font-size: 1rem; }
+.chips button span { font-size: .8rem; color: var(--muted); }
+.chips button:hover { border-color: var(--gold); }
+.chips button:focus-visible { outline: 3px solid var(--marigold); outline-offset: 2px; }
+.chips button[aria-pressed="true"] { background: var(--chip-on); border-color: var(--chip-on); color: var(--chip-on-fg); }
+.chips button[aria-pressed="true"] span { color: var(--chip-on-fg); opacity: .85; }
+
+.player { display: grid; gap: .6rem; }
+video { width: 100%; max-width: 100%; aspect-ratio: 4 / 5; border-radius: 1rem; background: var(--line); display: block; border: 1px solid var(--line); }
+.hint { font-size: .85rem; color: var(--muted); margin: 0; text-align: center; }
+
+.steps { display: grid; gap: .1rem; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 1.9rem 1fr; gap: .7rem; padding: .7rem 0; border-bottom: 1px solid var(--line); align-items: start; }
+.steps li::before { counter-increment: s; content: counter(s); width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center;
+  background: var(--marigold); color: #fff; font-weight: 600; font-size: .9rem; }
+.steps li.leg::before { background: var(--maroon); }
+.steps li.arrive::before { content: "\2713"; background: var(--gold); }
+.steps li p { margin: 0; min-width: 0; }
+.steps strong { color: var(--maroon); font-weight: 600; }
+
+.actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; }
+.btn { display: flex; align-items: center; justify-content: center; gap: .4rem; text-decoration: none; font: inherit; font-weight: 600; cursor: pointer;
+  padding: .8rem 1rem; border-radius: .8rem; border: 1.5px solid var(--maroon); color: var(--maroon); background: transparent; text-align: center; }
+.btn.primary { background: var(--maroon); color: var(--chip-on-fg); }
+:root[data-theme="dark"] .btn.primary, :root:not([data-theme="light"]) .btn.primary { color: var(--chip-on-fg); }
+.btn:focus-visible { outline: 3px solid var(--marigold); outline-offset: 2px; }
+.btn.wide { grid-column: 1 / -1; }
+footer { text-align: center; font-size: .8rem; color: var(--muted); }
+@media (max-width: 360px) { .chips { grid-template-columns: 1fr; } .actions { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="petals" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="eyebrow">Wedding venue · directions</div>
+    <h1>Marigold Banquets &lsquo;N&rsquo; Conventions</h1>
+    <p class="addr">Opp. Windmill Village Rd, Bavdhan, Pune 411021</p>
+  </header>
+
+  <section class="pick" aria-labelledby="pickh">
+    <h2 id="pickh">Where are you coming from?</h2>
+    <div class="chips" role="group" aria-label="Starting area">
+      <button type="button" id="o-irani" data-k="irani" aria-pressed="true"><b>Irani Cafe</b><span>Already at Chandani Chowk</span></button>
+      <button type="button" id="o-wakad" data-k="wakad" aria-pressed="false"><b>Wakad / Baner</b><span>Via NH 48 highway</span></button>
+      <button type="button" id="o-kothrud" data-k="kothrud" aria-pressed="false"><b>Kothrud</b><span>Via Paud Road</span></button>
+      <button type="button" id="o-warje" data-k="warje" aria-pressed="false"><b>Warje</b><span>Via NH 48 towards Mumbai</span></button>
+      <button type="button" id="o-shivajinagar" data-k="shivajinagar" aria-pressed="false"><b>Shivajinagar / University</b><span>Via Pashan, past Irani Cafe</span></button>
+    </div>
+  </section>
+
+  <section class="player" aria-label="Route video">
+    <video id="vid" controls playsinline muted preload="metadata" poster="poster-irani.jpg" src="route-irani.mp4"></video>
+    <p class="hint">Tap your area to play that route · about 20–30 seconds each</p>
+  </section>
+
+  <section aria-labelledby="stepsh" style="display:grid;gap:.4rem">
+    <h2 id="stepsh">Turn by turn</h2>
+    <ol class="steps" id="steps"></ol>
+  </section>
+
+  <div class="actions">
+    <a class="btn primary wide" id="go" href="https://www.google.com/maps/dir/?api=1&amp;destination=Marigold+Banquets+N+Conventions%2C+Bavdhan%2C+Pune&amp;travelmode=driving" target="_blank" rel="noopener">Start navigation in Google Maps</a>
+    <a class="btn" href="https://maps.app.goo.gl/3tUqGBkVh3oRkjiJA" target="_blank" rel="noopener">View venue</a>
+    <button class="btn" type="button" id="copy">Copy address</button>
+  </div>
+  <footer>Maps are simplified and not to scale. Please follow road signs and Google Maps on the day.</footer>
+</div>
+
+<script>
+const LEG = [
+  ['leg', 'Drive west on <strong>Paud Road (NH 753F)</strong> for about 1.7 km. Mantri Lavendula and Jijai Coffee House pass on your right.'],
+  ['leg', '<strong>Turn right at ICICI Bank</strong> (Bavdhan Khurd) onto Patil Nagar Rd. Go straight about 350 m, over the small Ramnadi bridge.'],
+  ['leg', '<strong>Turn left off Patil Nagar Rd</strong> and follow the bend.'],
+  ['arrive', 'The venue entrance is on your <strong>right</strong>, opposite Windmill Village.'],
+];
+const LOOP = [
+  ['', 'At Chandani Chowk, <strong>go straight across</strong> the junction. Don&rsquo;t turn right here.'],
+  ['', 'Take the <strong>U-turn loop</strong> near Garden Court Restaurant.'],
+  ['', 'Coming back up, <strong>keep left onto Paud Road (NH 753F)</strong> towards Bavdhan.'],
+];
+const ROUTES = {
+  irani: [['', 'Start near <strong>Irani Cafe</strong> and head south towards Chandani Chowk.'], ...LOOP],
+  wakad: [['', 'Come down <strong>NH 48</strong> from Wakad / Baner towards Satara.'],
+          ['', 'Take the <strong>Chandani Chowk exit</strong> (keep left) and come down past Irani Cafe.'], ...LOOP],
+  kothrud: [['', 'Come along <strong>Paud Road</strong> from Kothrud.'],
+            ['', 'At Chandani Chowk, <strong>go straight</strong> on Paud Road. Don&rsquo;t take the highway ramps or flyover.']],
+  warje: [['', 'Take <strong>NH 48 towards Mumbai</strong> from Warje.'],
+          ['', 'Take the <strong>Paud Road / Chandani Chowk exit</strong> on the left.'],
+          ['', 'Go <strong>straight on Paud Road</strong> westwards through Chandani Chowk.']],
+  shivajinagar: [['', 'From Shivajinagar, go via <strong>Pune University and Pashan</strong> towards Chandani Chowk.'],
+                 ['', 'Come down the road past <strong>Irani Cafe</strong>.'], ...LOOP],
+};
+const vid = document.getElementById('vid');
+const steps = document.getElementById('steps');
+const chips = [...document.querySelectorAll('.chips button')];
+
+function show(k, play) {
+  if (!ROUTES[k]) k = 'irani';
+  chips.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === k)));
+  if (!vid.src.endsWith('route-' + k + '.mp4')) {
+    vid.poster = 'poster-' + k + '.jpg';
+    vid.src = 'route-' + k + '.mp4';
+  }
+  steps.innerHTML = [...ROUTES[k], ...LEG].map(([c, t]) => `<li class="${c}"><p>${t}</p></li>`).join('');
+  try { localStorage.setItem('origin', k); } catch (e) {}
+  if (play) { vid.currentTime = 0; vid.play().catch(() => {}); }
+}
+chips.forEach(b => b.addEventListener('click', () => {
+  show(b.dataset.k, true);
+  vid.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+}));
+
+let start = (location.hash || '').slice(1);
+if (!ROUTES[start]) { try { start = localStorage.getItem('origin') || 'irani'; } catch (e) { start = 'irani'; } }
+show(start, false);
+
+const ADDRESS = "Marigold Banquets 'N' Conventions, Opp. Windmill Village Rd, Bavdhan, Pune 411021";
+document.getElementById('copy').addEventListener('click', e => {
+  const btn = e.currentTarget;
+  navigator.clipboard.writeText(ADDRESS).then(() => { btn.textContent = 'Address copied'; })
+    .catch(() => { btn.textContent = ADDRESS; });
+  setTimeout(() => { btn.textContent = 'Copy address'; }, 2500);
+});
+</script>
+
+</body>
+</html>
